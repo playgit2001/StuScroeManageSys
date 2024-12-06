@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+datasource:
+  driver-name: mysql
+  host: 127.0.0.1
+  port: 3306
+  database: Student_info_manager
+  username: root
+  password: wl5201314
+  charset: utf8mb4
+
