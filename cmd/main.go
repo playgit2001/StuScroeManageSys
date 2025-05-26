@@ -1,29 +1,23 @@
 package main
 
 import (
+	"StuScroeManageSys/internal"
 	"StuScroeManageSys/internal/common"
+	"StuScroeManageSys/internal/model"
+	"StuScroeManageSys/internal/router"
+	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/spf13/viper"
-	"os"
-	"strings"
+	"log"
 )
 
-func viperinit() {
-	dir, _ := os.Getwd()
-	dir = strings.TrimSuffix(dir, "/cmd")
-	viper.SetConfigName("config")
-	viper.AddConfigPath(dir + "/config")
-	viper.SetConfigType("yaml")
-	err := viper.ReadInConfig()
-	if err != nil {
-
-		panic("")
-	}
-}
-
 func main() {
-	viperinit()
-	DB := common.InitDB()
-	DB.Close()
-
+	internal.TotalInit()
+	common.InitDB()
+	db := common.GetDB()
+	if err := model.AtuoMigrateAll(db); err != nil {
+		log.Fatal("AutoMigrate failed:", err)
+	}
+	r := gin.Default()
+	router.InitRouter(r)
+	r.Run(":8080")
 }

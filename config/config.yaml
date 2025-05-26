@@ -9,4 +9,5 @@ datasource:
   username: root
   password: wl5201314
   charset: utf8mb4
-
+log:
+  log-path: "./log"

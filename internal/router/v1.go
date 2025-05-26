@@ -1,11 +1,19 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"StuScroeManageSys/internal/handler"
+	"github.com/gin-gonic/gin"
+)
 
-func initRouter(r *gin.Engine) {
-	//v1 := r.Group("/api/v1")
+func InitRouter(r *gin.Engine) {
+	v1 := r.Group("/api/v1")
 	{
 		//登录
-		//v1.POST("/login", login)
+		v1.POST("/login", handler.GetUser)
+		v1.POST("/addUser", handler.AddUser)
+		v1.GET("/getUsers/:id", handler.GetUserByID)
+		v1.DELETE("/deleteUser/:id", handler.DeleteUser)
+		//v1.POST("/updateUser",)
+		//v1.POST("/register", handler.Regists)
 	}
 }
