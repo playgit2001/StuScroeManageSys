@@ -13,7 +13,8 @@ func InitRouter(r *gin.Engine) {
 		v1.POST("/addUser", handler.AddUser)
 		v1.GET("/getUsers/:id", handler.GetUserByID)
 		v1.DELETE("/deleteUser/:id", handler.DeleteUser)
-		//v1.POST("/updateUser",)
-		//v1.POST("/register", handler.Regists)
+		v1.POST("/updateUser", handler.UpdateUser)
+		v1.GET("/UpdateUserID/:newid/:oldid", handler.UpdateUserByID)
+		v1.DELETE("/deleteUserByIds", handler.DeleteUserByIdsHandler)
 	}
 }

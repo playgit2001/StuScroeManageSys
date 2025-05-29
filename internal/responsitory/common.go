@@ -51,3 +51,33 @@ func DeteleUser(id int) error {
 	}
 	return nil
 }
+
+func UpdateUser(user model.User) error {
+	db := common.GetDB()
+	id := user.ID
+	err := db.Find(&user, id).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return fmt.Errorf("not find User")
+	}
+	db = db.Debug()
+	err = db.Model(&model.User{}).Where("id=?", id).Updates(user).Error
+	if err != nil {
+		return fmt.Errorf("database error:%v", err)
+	}
+	return nil
+}
+
+func UpdateUserId(newId, oldId int) error {
+	db := common.GetDB()
+	err := db.Model(model.User{}).Where("id = ?", oldId).Update("id", newId).Error
+	return err
+}
+func DeleteUserByIds(ids []int) error {
+	db := common.GetDB()
+	fmt.Println(ids)
+	result := db.Debug().Where("id in (?)", ids).Delete(&model.User{})
+	if result != nil {
+		return result.Error
+	}
+	return nil
+}

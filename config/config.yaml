@@ -7,7 +7,7 @@ datasource:
   port: 3306
   database: Student_info_manager
   username: root
-  password: wl5201314
+  password: 123456
   charset: utf8mb4
 log:
   log-path: "./log"

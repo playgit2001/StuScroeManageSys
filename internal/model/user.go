@@ -20,8 +20,7 @@ type Admin struct {
 }
 type User struct {
 	gorm.Model
-	ID         int    `form:"ID" json:"id" binding:"required" gorm:"primary_key"`
-	UserName   string `form:"UserName" json:"Username" binding:"required"`
+	UserName   string `form:"UserName" json:"UserName" binding:"required"`
 	Password   string `form:"password" json:"password" binding:"required"`
 	Age        int    `form:"age" json:"age" binding:"gte=0"`
 	Sex        int    `form:"sex" json:"sex" binding:"gte=0"`
